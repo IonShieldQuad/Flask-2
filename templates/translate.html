@@ -1,0 +1,39 @@
+
+{% extends "base.html" %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block head %}
+<script src="{{ url_for('static', filename='js/translate.js') }}" defer></script>
+{% endblock %}
+
+{% block content %}
+<div class="header">Translate</div>
+<form id="translate" name="translate" class="vis" action="" method="post" novalidate>
+{{ form.hidden_tag() }}
+    <p>
+    {{ form.translate_from.label }} {{ form.translate_from }} {{ form.translate_to.label }}  {{ form.translate_to }}
+    </p>
+    {% for error in form.translate_from.errors %}
+        <div class="alert alert-danger" role="alert">
+        {{ error }}
+        </div>
+    {% endfor %}
+
+    {% for error in form.translate_to.errors %}
+        <div class="alert alert-danger" role="alert">
+        {{ error }}
+        </div>
+    {% endfor %}
+    <textarea id="inputMessage" rows="8" cols="60"></textarea>
+    <div>
+        {{ form.submit() }}
+        <button id="reverseButton">Reverse</button>
+    </div>
+</form>
+<div id="out">
+    <textarea id="outputMessage" rows="8" cols="60"></textarea>
+</div>
+{% endblock %}
